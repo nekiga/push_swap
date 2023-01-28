@@ -8,23 +8,28 @@
  typedef struct stack_a
 {
     long *array;
-    size_t iniLen;
-    size_t curLen;
+    long iniLen;
+    long curLen;
 
 }stack_a;
 
  typedef struct stack_b
 {
     long *array;
-    size_t iniLen;
-    size_t curLen;
+    long iniLen;
+    long curLen;
 
 }stack_b;
-
+//base functions
 long 	*mArray(int argc, char **argv);
 long	ft_atol(const char *str);
 long	ft_strlen(char *str);
-long    arrayLen(long *array);
+long    getArrayLen(long *array);
 bool	checkIfArray (long *array);
+// push swap moves
+int sa(stack_a stack_a);
+int ra( stack_a stack_a);
+// tester functions
+void    printArray(stack_a stack_a);
 
 #endif

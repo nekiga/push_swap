@@ -1,9 +1,10 @@
 #include "push_swap.h"
 
-int push_swap( stack_a stack_a, stack_b stack_b)
+/* int push_swap( stack_a stack_a, stack_b stack_b)
 {
     return (0);
 }
+ */
 int main(int argc, char **argv)
 {
     long i;
@@ -16,15 +17,13 @@ int main(int argc, char **argv)
     len = 0;
     if (argc == 1)
         return(1);
-    while (i != argc)
-	{
-		len += ft_strlen(argv[i]);
-		i++;
-	}
-    stack_a.array = (long *)malloc(sizeof(long) *  len);
+    stack_a.array = mArray(argc, argv);
     if (!stack_a.array)
         return (1);
-    stack_a.array = mArray(argc, argv);
+    stack_a.iniLen = argc - 1; 
+    stack_a.curLen = stack_a.iniLen; // Really need a function that calculates the current size of the array
+    ra(stack_a);
 
+    printArray(stack_a);
     return (0);
 }

@@ -21,7 +21,7 @@ long getArrayLen(long *array)
 long	ft_atol(const char *str)
 {
 	long	    i;
-	long	res;
+	long	res;	
 	int	    sign;
 
 	sign = 1;
@@ -63,7 +63,7 @@ long 	*mArray(int argc, char **argv)
 	while (i != argc)
 	{
 		array[j] = atol(argv[i]);
-		//printf("The i is : %ld and the arrj is: %ld \n", i, array[j]);
+		printf("The i is : %ld and the arrj is: %ld \n", i, array[j]);
 		i++;
 		j++;
 	}
@@ -83,7 +83,7 @@ long	ft_strlen(char *str)
 //check if array is empty
 bool	checkIfArray (long *array)
 {
-	int	len;
+	long	len;
 
 	len = getArrayLen(array);
 	while (len)
@@ -94,5 +94,3 @@ bool	checkIfArray (long *array)
 	}
 	return (false);
 }
-
-int	push
