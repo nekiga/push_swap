@@ -1,26 +1,55 @@
 #include "push_swap.h"
 
-bool	ft_isdigit(int c)
+bool	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (true);
 	else
 		return (false);
 }
+
+void	ft_putChar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putCharE(char c)
+{
+	write (2, &c, 1);
+}
+
+void	ft_putStr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		ft_putChar(str[i++]);
+}
+
+void	ft_putError(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		ft_putCharE(str[i++]);
+}
+
 //calculates lenght of array
 long getArrayLen(long *array)
 {
 	long len;
 	
 	len = sizeof(array) / sizeof(long);
-	//printf(" INFUC lenght of array is %ld \n", len);
 	return (len);
 	
 }
 // takes in a string and turns it into longs
+//CHECK INPUTS LIKE 03 +3 -3  a
 long	ft_atol(const char *str)
 {
-	long	    i;
+	long	    i;	
 	long	res;	
 	int	    sign;
 
@@ -63,7 +92,6 @@ long 	*mArray(int argc, char **argv)
 	while (i != argc)
 	{
 		array[j] = atol(argv[i]);
-		printf("The i is : %ld and the arrj is: %ld \n", i, array[j]);
 		i++;
 		j++;
 	}
@@ -93,4 +121,66 @@ bool	checkIfArray (long *array)
 		len--;
 	}
 	return (false);
+}
+
+bool	checkIfDouble(stack_a stack_a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i <= stack_a.iniLen)
+	{
+		j = i + 1;
+		while (j <= stack_a.iniLen)
+		{
+			if (stack_a.array[i] == stack_a.array[j])
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool checkArgs(stack_a stack_a)
+{
+	int	i;
+
+	i = 0;
+	while(i != stack_a.iniLen)
+	{
+		if (checkIfDouble(stack_a) == false)
+			return (false);
+		i++;
+	}
+	i = 0;
+	while (i != stack_a.iniLen)
+	{
+		if (stack_a.array[i] > INT_MAX)
+			return (false);
+		if (stack_a.array[i] < INT_MIN)
+			return(false);
+		i++;
+	}
+	return (true);
+}
+
+int	error(void)
+{
+	ft_putError("Error");
+	ft_putCharE('\n');
+	return(1);
+}
+
+int init(stack_a stack_a, stack_b stack_b, int argc, char **argv)
+{
+	printf("%d", argc );
+    stack_a.array = mArray(argc, argv);
+    stack_b.array = malloc(sizeof(long) * argc - 1);
+    stack_a.iniLen = argc - 1; 
+    stack_a.curLen = stack_a.iniLen;
+    stack_b.iniLen = stack_a.iniLen;
+    stack_b.curLen = stack_a.iniLen;
+	return (1);
 }

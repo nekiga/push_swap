@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -26,10 +27,21 @@ long	ft_atol(const char *str);
 long	ft_strlen(char *str);
 long    getArrayLen(long *array);
 bool	checkIfArray (long *array);
+bool checkArgs(stack_a stack_a);
+int	error(void);
 // push swap moves
 int sa(stack_a stack_a);
 int ra( stack_a stack_a);
+int pb( stack_a stack_a,  stack_b stack_b);
+int pa( stack_a stack_a,  stack_b stack_b);
+int ra(stack_a stack_a);
+int rb(stack_b stack_b);
+int rr( stack_a stack_a,  stack_b stack_b);
+int rra( stack_a stack_a);
+int rrb( stack_b stack_b);
+int rrr( stack_a stack_a,  stack_b stack_b);
 // tester functions
 void    printArray(stack_a stack_a);
+void    printArrayb(stack_b stack_b);
 
 #endif

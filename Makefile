@@ -12,7 +12,7 @@ all: $(NAME)
 $(NAME): $(SRC:=.o)
 	@echo "$(GREEN)\nCompiling...\n$(DEFAULT)"
 	ar rcs $(NAME) $(SRC:=.o)
-	$(CC) -Wall -g $(NAME) -o push
+	$(CC) -Wall -Werror -Wextra -g $(NAME) -o push
 	@echo "$(GREEN)\nDone compiling...\n$(DEFAULT)"
 clean:
 	rm -f $(SRC:=.o)

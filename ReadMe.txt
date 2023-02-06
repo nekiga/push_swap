@@ -67,3 +67,27 @@ Convert into arrays
 Find the best algorithm
 Do the algorithm
 Print the moves
+
+
+int pb(stack_a stack_a,  stack_b stack_b)
+{
+    long    temp;
+    long    i;
+
+    i = stack_b.curLen;
+   if (!checkIfArray(stack_a.array))
+        return (1);
+    temp = stack_a.array[0];
+     while (i)
+     {
+        stack_b.array[i] = stack_b.array[i - 1];
+        i--;
+    } 
+    stack_b.array[0] = temp;
+    while (i != stack_a.curLen)
+    {
+        stack_a.array[i] = stack_a.array[i + 1];
+        i++;
+    }
+    stack_a.array[stack_a.iniLen] = 0;
+    return (0);
