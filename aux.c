@@ -4,8 +4,29 @@ bool	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (true);
-	else
-		return (false);
+	return (false);
+}
+bool onlydigit(int argc, char **argv)
+{
+	int	i;
+	int	j;
+	int len;
+
+
+	i = 1;
+	len = ft_strlen(argv[i]);
+	while (i != argc)
+	{
+		j = 0;
+		while (j != ft_strlen(argv[i]))
+		{
+			if (ft_isdigit(argv[i][j]) == false)
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }
 
 void	ft_putChar(char c)
@@ -46,7 +67,6 @@ long getArrayLen(long *array)
 	
 }
 // takes in a string and turns it into longs
-//CHECK INPUTS LIKE 03 +3 -3  a
 long	ft_atol(const char *str)
 {
 	long	    i;	
@@ -148,13 +168,8 @@ bool checkArgs(stack_a stack_a)
 	int	i;
 
 	i = 0;
-	while(i != stack_a.iniLen)
-	{
-		if (checkIfDouble(stack_a) == false)
+	if (checkIfDouble(stack_a) == false )
 			return (false);
-		i++;
-	}
-	i = 0;
 	while (i != stack_a.iniLen)
 	{
 		if (stack_a.array[i] > INT_MAX)
@@ -166,21 +181,11 @@ bool checkArgs(stack_a stack_a)
 	return (true);
 }
 
-int	error(void)
+int	error(stack_a stack_a, stack_b stack_b)
 {
 	ft_putError("Error");
 	ft_putCharE('\n');
+	free(stack_b.array);
+    free(stack_a.array);
 	return(1);
-}
-
-int init(stack_a stack_a, stack_b stack_b, int argc, char **argv)
-{
-	printf("%d", argc );
-    stack_a.array = mArray(argc, argv);
-    stack_b.array = malloc(sizeof(long) * argc - 1);
-    stack_a.iniLen = argc - 1; 
-    stack_a.curLen = stack_a.iniLen;
-    stack_b.iniLen = stack_a.iniLen;
-    stack_b.curLen = stack_a.iniLen;
-	return (1);
 }

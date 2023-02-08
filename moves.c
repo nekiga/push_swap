@@ -1,4 +1,5 @@
 #include "push_swap.h"
+
 //sa (swap a): Swap the first 2 elements at the top of stack a.
 //Do nothing if there is only one or no elements. :D
 int sa(stack_a stack_a)
@@ -158,44 +159,42 @@ int rr( stack_a stack_a,  stack_b stack_b)
 int rra( stack_a stack_a)
 {
     long temp;
-    long    tempLast;
+    long tempLast;
     long i;
-    long j;
 
-    j = stack_a.curLen;
-    i = 0;
-    tempLast = stack_a.array[stack_a.curLen];
-    while(i != stack_a.curLen)
+    tempLast = stack_a.array[stack_a.curLen - 1];
+    i = stack_a.curLen - 1;
+    while (i > 0)
     {
         temp = stack_a.array[i];
-        stack_a.array[i] = stack_a.array[i + 1];
-        stack_a.array[i] = temp;
-        i++;
-        j--;
+        stack_a.array[i] = stack_a.array[i - 1];
+        stack_a.array[i - 1] = temp;
+        i--;
     }
-     write(1, "rra\n", 4);
-    return (0);
+    stack_a.array[0] = tempLast;
+    write(1, "rra\n", 4);
+    return 0;
 }
-
 //rrb (reverse rotate b): Shift down all elements of stack b by 1.
 //The last element becomes the first one. !!
 int rrb(  stack_b stack_b)
 {
-     long temp;
+    long temp;
+    long tempLast;
     long i;
-    long j;
 
-    j = stack_b.curLen;
-    while(i != stack_b.curLen)
+    tempLast = stack_b.array[stack_b.curLen - 1];
+    i = stack_b.curLen - 1;
+    while (i > 0)
     {
-        temp = stack_b.array[j];
-        stack_b.array[j] = stack_b.array[j - 1];
-        stack_b.array[j] = temp;
-        i++;
-        j--;
+        temp = stack_b.array[i];
+        stack_b.array[i] = stack_b.array[i - 1];
+        stack_b.array[i - 1] = temp;
+        i--;
     }
-     write(1, "rrb\n", 4);
-    return (0);
+    stack_b.array[0] = tempLast;
+    write(1, "rrb\n", 4);
+    return 0;
 }
 //rrr : rra and rrb at the same time.
 int rrr( stack_a stack_a,  stack_b stack_b)

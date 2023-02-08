@@ -27,8 +27,10 @@ long	ft_atol(const char *str);
 long	ft_strlen(char *str);
 long    getArrayLen(long *array);
 bool	checkIfArray (long *array);
-bool checkArgs(stack_a stack_a);
-int	error(void);
+bool    checkArgs(stack_a stack_a);
+int	    error(stack_a stack_a, stack_b stack_b);
+bool	ft_isdigit(char c);
+bool    onlydigit(int argc, char **argv);
 // push swap moves
 int sa(stack_a stack_a);
 int ra( stack_a stack_a);
@@ -40,6 +42,8 @@ int rr( stack_a stack_a,  stack_b stack_b);
 int rra( stack_a stack_a);
 int rrb( stack_b stack_b);
 int rrr( stack_a stack_a,  stack_b stack_b);
+// algorithm
+int sort3(stack_a stack_a, stack_b stack_b);
 // tester functions
 void    printArray(stack_a stack_a);
 void    printArrayb(stack_b stack_b);
