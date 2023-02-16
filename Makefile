@@ -3,9 +3,11 @@ GREEN = \033[0;92m
 DEFAULT = \033[0;39m
 
 CC = gcc
-SRC = push_swap moves aux test al3
+SRC = push_swap moves aux test algo
 
 NAME = push_swap.a
+
+$(VERBOSE).SILENT:
 
 all: $(NAME)
 

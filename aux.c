@@ -1,25 +1,28 @@
 #include "push_swap.h"
 
+//checks if char is a digit
 bool	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (true);
 	return (false);
 }
+//iterates over a 2d array of chars to check if all of them represent digits
 bool onlydigit(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	int len;
 
 
 	i = 1;
-	len = ft_strlen(argv[i]);
 	while (i != argc)
 	{
 		j = 0;
-		while (j != ft_strlen(argv[i]))
+		while (j != ft_strlen(argv[i] - 1))
 		{
+			
+			 if (j = 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
+				j++; 
 			if (ft_isdigit(argv[i][j]) == false)
 				return (false);
 			j++;
@@ -33,7 +36,7 @@ void	ft_putChar(char c)
 {
 	write(1, &c, 1);
 }
-
+//put char on stderr
 void	ft_putCharE(char c)
 {
 	write (2, &c, 1);
@@ -47,7 +50,7 @@ void	ft_putStr(char *str)
 	while (str[i])
 		ft_putChar(str[i++]);
 }
-
+//putstr on stderr 
 void	ft_putError(char *str)
 {
 	int	i;
@@ -142,19 +145,19 @@ bool	checkIfArray (long *array)
 	}
 	return (false);
 }
-
-bool	checkIfDouble(stack_a stack_a)
+//receives stack and checks if its array contains duplicated digits
+bool	checkIfDouble(stack_a *stack_a)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i <= stack_a.iniLen)
+	while (i <= stack_a->iniLen)
 	{
 		j = i + 1;
-		while (j <= stack_a.iniLen)
+		while (j <= stack_a->iniLen)
 		{
-			if (stack_a.array[i] == stack_a.array[j])
+			if (stack_a->array[i] == stack_a->array[j])
 				return (false);
 			j++;
 		}
@@ -162,30 +165,43 @@ bool	checkIfDouble(stack_a stack_a)
 	}
 	return (true);
 }
-
-bool checkArgs(stack_a stack_a)
+//Checks if all array members are in the limits of int and calls check double
+bool checkArgs(stack_a *stack_a)
 {
 	int	i;
 
 	i = 0;
 	if (checkIfDouble(stack_a) == false )
 			return (false);
-	while (i != stack_a.iniLen)
+	while (i != stack_a->iniLen)
 	{
-		if (stack_a.array[i] > INT_MAX)
+		if (stack_a->array[i] > INT_MAX)
 			return (false);
-		if (stack_a.array[i] < INT_MIN)
+		if (stack_a->array[i] < INT_MIN)
 			return(false);
 		i++;
 	}
 	return (true);
 }
-
-int	error(stack_a stack_a, stack_b stack_b)
+//Prints the word Error and a new line on stderr and frees memory in case of abnormal shut down
+int	error(stack_a *stack_a, stack_b *stack_b)
 {
 	ft_putError("Error");
 	ft_putCharE('\n');
-	free(stack_b.array);
-    free(stack_a.array);
+	free(stack_b->array);
+    free(stack_a->array);
 	return(1);
+}
+
+bool checkSorted(stack_a *stack_a)
+{
+	  int i;
+	  i = 0;
+    while (i < stack_a->iniLen - 1)
+	 {
+        if (stack_a->array[i] > stack_a->array[i + 1])
+            return false;
+        i++;
+    }
+    return true;
 }
