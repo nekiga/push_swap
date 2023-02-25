@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/16 14:45:04 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:01:26 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 		sort3(stack_a, stack_b);
 	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
+	else if(stack_a->inilen == 100)
+		sort100(stack_a, stack_b);
+	else
+		printf("DID NOT MEET ANY CONDITIONS IN PUSH_SWAP FUNC\n");
 }
 
 // The function main initializes the stacks and sends them to push swap,
@@ -53,8 +57,9 @@ int	main(int argc, char **argv)
 	if (!checkArgs(stack_a))
 		return (error(stack_a, stack_b));
 	push_swap(stack_a, stack_b);
-	printArray(stack_a);
 	free(stack_b->array);
 	free(stack_a->array);
+	free(stack_a);
+	free(stack_b);
 	return (0);
 }

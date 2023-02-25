@@ -155,7 +155,7 @@ bool	checkIfDouble(t_stack_a *stack_a)
 	while (i <= stack_a->inilen)
 	{
 		j = i + 1;
-		while (j <= stack_a->inilen)
+		while (j <= stack_a->inilen - 1)
 		{
 			if (stack_a->array[i] == stack_a->array[j])
 				return (false);
@@ -190,14 +190,17 @@ int	error(t_stack_a *stack_a, t_stack_b *stack_b)
 	ft_putCharE('\n');
 	free(stack_b->array);
     free(stack_a->array);
+	free(stack_a);
+	free(stack_b);
 	return(1);
 }
 
 bool checkSorted(t_stack_a *stack_a)
 {
 	  int i;
+	  
 	  i = 0;
-    while (i < stack_a->inilen - 1)
+    while (i < stack_a->curlen - 1)
 	 {
         if (stack_a->array[i] > stack_a->array[i + 1])
             return false;
