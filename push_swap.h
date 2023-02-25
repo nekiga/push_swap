@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 16:48:03 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:25:25 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			error(t_stack_a *stack_a, t_stack_b *stack_b);
 bool		ft_isdigit(char c);
 bool		onlydigit(int argc, char **argv);
 bool		checkSorted(t_stack_a *stack_a);
+void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);

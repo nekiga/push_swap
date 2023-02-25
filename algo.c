@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 17:23:14 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:34:27 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
 		stack_a->curlen++;
 	}
 }
-void	bubblesort(t_stack_a *stack_a)
+void	bubblesort(t_stack_a *stack_a, long *array)
 {
 	int		i;
 	int		j;
@@ -81,11 +81,11 @@ void	bubblesort(t_stack_a *stack_a)
 		j = 0;
 		while (j < i)
 		{
-			if (stack_a->array[j] > stack_a->array[j + 1])
+			if (array[j] > array[j + 1])
 			{
-				temp = stack_a->array[j];
-				stack_a->array[j] = stack_a->array[j + 1];
-				stack_a->array[j + 1] = temp;
+				temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
 			}
 			j++;
 		}
@@ -102,18 +102,20 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 	i = 0;
 	j = 0;
 	chunk = 20;
-	array = malloc(sizeof(long) * stack_a->inilen);
+	array = (long *)malloc(sizeof(long) * stack_a->inilen);
 	if (!array)
 		error(stack_a, stack_b);
-	bubblesort(stack_a);
-	while (!checkSorted(stack_a))
+	while (i < stack_a->inilen - 1)
+		array[i] = stack_a->array[i++];
+	i = 0;
+	bubblesort(stack_a, array);
+	stack_b->call = true;
+	while (!checkSorted(stack_a) && chunk <= 100)
 	{
-		printf("a");
-		stack_b->call = true;
 		pushchunk(stack_a, stack_b, chunk, array);
-		while (i-- < chunk)
+		while (i++ <= chunk)
 			smartpush(stack_a, stack_b);
-		chunk = +20;
+		chunk += 20;
 	}
 	free(array);
 }
@@ -144,8 +146,6 @@ char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 				flag = 'S';
 	else
 		flag = 'B';
-	// Check for the biggest number
-	// o que for mais otimizado fazer
 	return (flag);
 }
 // vai receber uma flag que lhe vai dizer que numero mandar com ra ou rra para o top
@@ -189,8 +189,8 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 		long *array)
 {
-	long		hold1;
-	long		hold2;
+	long		hold;
+
 	static long	i;
 
 	if (stack_b->call == true)
@@ -198,14 +198,13 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 		i = 0;
 		stack_b->call == false;
 	}
-	hold1 = array[20];
-	while (i < stack_a->curlen)
+	hold = array[chunk - 1];
+	while (i < stack_a->curlen && i <= chunk - 1)
 	{
-		if (stack_a->array[i] < hold1)
-		{
-			pushtop(stack_a, i);
+		if (stack_a->array[0] < hold)
 			pb(stack_a, stack_b);
-		}
+		else
+			ra(stack_a);
 		i++;
 	}
 }
@@ -213,8 +212,8 @@ long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 {
 	long	i;
 	long	min;
-
-	i = 1;
+	
+	i = 0;
 	if (flag == 'a')
 	{
 		if (stack_a->curlen == 0)
@@ -253,7 +252,8 @@ long	findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 	long	i;
 	long	max;
 
-	i = 1;
+
+	i = 0;
 	if (flag == 'a')
 	{
 		if (stack_a->curlen == 0)
@@ -279,7 +279,7 @@ long	findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 	{
 		if (stack_b->array[i] > max)
 		{
-			max = stack_a->array[i];
+			max = stack_b->array[i];
 			stack_b->biggest = i;
 		}
 		i++;
@@ -305,11 +305,10 @@ void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 
 void	pushtop(t_stack_a *stack_a, long i)
 {
-	long pos;
 	long temp;
 
-	pos = stack_a->array[i];
-	temp = stack_a->array[pos];
+	temp = stack_a->array[i];
+	printf("stack_a.array[i] is: %ld\n", stack_a->array[i]);
 	while (stack_a->array[0] != temp)
 		ra(stack_a);
 }

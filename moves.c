@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:28 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/16 12:38:12 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:47:43 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	pa(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	i = stack_a->curlen;
 	temp = stack_b->array[0];
+	stack_a->curlen++;
 	while (i)
 	{
 		stack_a->array[i] = stack_a->array[i - 1];
@@ -92,17 +93,19 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	temp;
 	long	i;
 
-	i = stack_b->curlen;
+	i = stack_b->curlen - 1;
+	stack_b->curlen++;
 	if (!checkIfArray(stack_a->array))
 		return (1);
 	temp = stack_a->array[0];
-	while (i)
+	while (i <= 0)
 	{
-		stack_b->array[i] = stack_b->array[i - 1];
+		stack_b->array[i + 1] = stack_b->array[i];
 		i--;
 	}
 	stack_b->array[0] = temp;
-	while (i != stack_a->curlen)
+	i = 0;
+	while (i != stack_a->curlen - 1)
 	{
 		stack_a->array[i] = stack_a->array[i + 1];
 		i++;

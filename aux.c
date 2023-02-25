@@ -198,7 +198,7 @@ int	error(t_stack_a *stack_a, t_stack_b *stack_b)
 bool checkSorted(t_stack_a *stack_a)
 {
 	  int i;
-	  
+
 	  i = 0;
     while (i < stack_a->curlen - 1)
 	 {
@@ -207,4 +207,15 @@ bool checkSorted(t_stack_a *stack_a)
         i++;
     }
     return true;
+}
+
+void zero(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	int	i;
+
+	i = 0;
+	if (!stack_b->array)
+		error(stack_a, stack_b);
+	while (i < stack_b->inilen)
+		stack_b->array[i++] = 0;
 }
