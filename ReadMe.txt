@@ -91,3 +91,16 @@ int pb(stack_a stack_a,  stack_b stack_b)
     }
     stack_a.array[stack_a.iniLen] = 0;
     return (0);
+    
+    bool checkSorted(t_stack_a *stack_a)
+{
+	  int i;
+	  i = 0;
+    while (i < stack_a->inilen - 1)
+	 {
+        if (stack_a->array[i] > stack_a->array[i + 1])
+            return false;
+        i++;
+    }
+    return true;
+}
