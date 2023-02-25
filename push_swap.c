@@ -3,32 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/16 12:31:42 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:45:04 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
+void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	if (checkSorted(stack_a))
 		exit(0);
-	if (stack_a->inilen == 2)
+	else if (stack_a->inilen == 2)
 		sort2(stack_a, stack_b);
-	if (stack_a->inilen == 3)
+	else if (stack_a->inilen == 3)
 		sort3(stack_a, stack_b);
-	if (stack_a->inilen == 5)
+	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
-	return (0);
 }
 
 // The function main initializes the stacks and sends them to push swap,
 //while also protecting the different allocaitons,
 //freeing them and checking if all arguments are valid
-//accepot
 int	main(int argc, char **argv)
 {
 	t_stack_a	*stack_a;
