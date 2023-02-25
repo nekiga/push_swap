@@ -94,3 +94,16 @@ int pb(stack_a stack_a,  stack_b stack_b)
 
 
     20 55 34 91 78 42 23 25 56 77 92 31 17 13 68 30 79 11 65 38 7 2 33 61 24 81 35 8 97 14 5 58 10 66 50 44 93 73 96 90 21 70 83 76 99 36 74 67 69 85 29 52 88 87 59 47 100 72 75 41 86 12 62 43 80 45 60 1 64 54 82 71 22 4 57 63 9 27 94 32 49 18 39 48 40 53 26 15 37 95 28 46 89 16 84 6 98 3 19 51 
+    
+    bool checkSorted(t_stack_a *stack_a)
+{
+	  int i;
+	  i = 0;
+    while (i < stack_a->inilen - 1)
+	 {
+        if (stack_a->array[i] > stack_a->array[i + 1])
+            return false;
+        i++;
+    }
+    return true;
+}
