@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/26 17:54:46 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 20:28:53 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 	i = 0;
 	stack_a = malloc(sizeof(t_stack_a));
 	stack_b = malloc(sizeof(t_stack_b));
-	//zero(stack_a, stack_b);
 	if (argc == 1)
 		return (error(stack_a, stack_b));
 	if (onlydigit(argc, argv) == false)
@@ -58,42 +57,9 @@ int	main(int argc, char **argv)
 	if (!checkArgs(stack_a))
 		return (error(stack_a, stack_b));
 	push_swap(stack_a, stack_b);
-	/* pb(stack_a, stack_b);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	pb(stack_a, stack_b);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	sa(stack_a);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	ra(stack_a);
-	 printArray(stack_a);
-	printArrayb(stack_b);
-	pa(stack_a, stack_b);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	ra(stack_a);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	ra(stack_a);
-	printArray(stack_a);
-	printArrayb(stack_b);
-	ra(stack_a); */
 	free(stack_b->array);
 	free(stack_a->array);
 	free(stack_a);
 	free(stack_b);
 	return (0);
 }
-
-/* pb
-pb
-sa
-ra
-pa
-ra
-ra
-ra
-ra */
-

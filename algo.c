@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/26 18:33:15 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 20:27:00 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	i = 0;
 	j = 0;
-	chunk = 20;
+	chunk = 50;
 	array = (long *)malloc(sizeof(long) * stack_a->inilen);
 	if (!array)
 		error(stack_a, stack_b);
@@ -110,7 +110,7 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 		pushchunk(stack_a, stack_b, chunk, array);
 		while (i++ <= chunk)
 			smartpush(stack_a, stack_b);
-		chunk += 20;
+		chunk += 50;
 	}
 	free(array);
 }
@@ -160,6 +160,7 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 		while (stack_b->array[0] != smallest)
 			rb(stack_b);
 		pa(stack_a, stack_b);
+		ra(stack_a);
 	}
 	else if (flag == 'b')
 	{
@@ -172,6 +173,7 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 		while (stack_b->array[0] != smallest)
 			rrb(stack_b);
 		pa(stack_a, stack_b);
+		ra(stack_a);
 	}
 	else if (flag == 'B')
 	{
