@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:28 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 19:47:43 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 17:24:27 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,23 @@ int	pa(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	temp;
 	long	i;
 
-	i = stack_a->curlen;
-	temp = stack_b->array[0];
 	stack_a->curlen++;
-	while (i)
+	i = stack_a->curlen - 1;
+	temp = stack_b->array[0];
+	while (i > 0)
 	{
 		stack_a->array[i] = stack_a->array[i - 1];
+		//printf("in func pa i = %ld\n in func pa stack_a->array[i] = %ld\n", i , stack_a->array[i]);
 		i--;
 	}
 	stack_a->array[0] = temp;
-	while (i != stack_b->curlen)
+	i = 0;
+	while (i < stack_b->curlen - 1)
 	{
 		stack_b->array[i] = stack_b->array[i + 1];
 		i++;
 	}
-	stack_b->array[stack_b->inilen] = 0;
+	stack_b->array[stack_b->curlen - 1] = 0;
 	stack_b->curlen--;
 	write(1, "pa\n", 3);
 	return (0);
@@ -93,24 +95,24 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	temp;
 	long	i;
 
-	i = stack_b->curlen - 1;
 	stack_b->curlen++;
+	i = stack_b->curlen - 1;
 	if (!checkIfArray(stack_a->array))
 		return (1);
 	temp = stack_a->array[0];
-	while (i <= 0)
+	while (i >= 0)
 	{
 		stack_b->array[i + 1] = stack_b->array[i];
 		i--;
 	}
 	stack_b->array[0] = temp;
 	i = 0;
-	while (i != stack_a->curlen - 1)
+	while (i < stack_a->curlen - 1)
 	{
 		stack_a->array[i] = stack_a->array[i + 1];
 		i++;
 	}
-	stack_a->array[stack_a->inilen] = 0;
+	stack_a->array[stack_a->curlen - 1] = 0;
 	stack_a->curlen--;
 	write(1, "pb\n", 3);
 	return (0);

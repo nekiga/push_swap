@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 20:34:27 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:33:15 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
 	sort3(stack_a, stack_b);
 	pa(stack_a, stack_b);
 	if (stack_a->inilen == 5)
-	{
-		stack_a->curlen = stack_a->curlen + 2;
-		totop(stack_a, stack_b);
-		stack_a->array[0] = stack_b->array[0];
-		stack_a->curlen++;
-	}
+		pa(stack_a, stack_b);
 }
 void	bubblesort(t_stack_a *stack_a, long *array)
 {
@@ -110,7 +105,7 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 	i = 0;
 	bubblesort(stack_a, array);
 	stack_b->call = true;
-	while (!checkSorted(stack_a) && chunk <= 100)
+	while (chunk <= 100)
 	{
 		pushchunk(stack_a, stack_b, chunk, array);
 		while (i++ <= chunk)
@@ -128,24 +123,24 @@ char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	movesbig;
 	char	flag;
 
-	// find the smallest
 	smallest = findsmallest(stack_a, stack_b, 'b');
-	//find biggest
 	biggest = findbiggest(stack_a, stack_b, 'b');
-	// Check if its faster to ra or rrra
 	movessmall = stack_b->smallest - stack_b->curlen + 1;
 	movesbig = stack_b->biggest - stack_b->curlen + 1;
-	if (stack_b->smallest < movessmall)
+if (stack_b->smallest < movessmall)
+	{
 		if (stack_b->smallest < stack_b->biggest)
 			flag = 's';
-	else if (stack_b->smallest < movessmall)
-		if (stack_b->smallest > stack_b->biggest)
-				flag = 'b';
+		else
+			flag = 'b';
+	}
 	else if (stack_b->smallest > movessmall)
+	{
 		if (movessmall < movesbig)
-				flag = 'S';
-	else
-		flag = 'B';
+			flag = 'S';
+		else
+			flag = 'B';
+	}
 	return (flag);
 }
 // vai receber uma flag que lhe vai dizer que numero mandar com ra ou rra para o top
@@ -196,17 +191,20 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 	if (stack_b->call == true)
 	{
 		i = 0;
-		stack_b->call == false;
+		stack_b->call== false;
 	}
 	hold = array[chunk - 1];
-	while (i < stack_a->curlen && i <= chunk - 1)
+	while ( i <= chunk)
 	{
 		if (stack_a->array[0] < hold)
-			pb(stack_a, stack_b);
+		{	
+				pb(stack_a, stack_b);
+		}
 		else
 			ra(stack_a);
 		i++;
 	}
+
 }
 long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 {
@@ -306,9 +304,17 @@ void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 void	pushtop(t_stack_a *stack_a, long i)
 {
 	long temp;
-
+	int	x = 100;
 	temp = stack_a->array[i];
-	printf("stack_a.array[i] is: %ld\n", stack_a->array[i]);
-	while (stack_a->array[0] != temp)
-		ra(stack_a);
+	printf("temp %ld", temp);
+	if (i < i - stack_a->curlen + 1)
+	{
+		while (stack_a->array[0] != temp)
+			ra(stack_a);
+	}
+	else
+	{
+		while (stack_a->array[0] != temp && x--)
+			rra(stack_a);
+	}
 }

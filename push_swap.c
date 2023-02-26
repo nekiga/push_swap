@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 20:32:16 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 17:54:46 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,46 @@ int	main(int argc, char **argv)
 	stack_a->inilen = argc - 1;
 	stack_a->curlen = stack_a->inilen;
 	stack_b->inilen = stack_a->inilen;
-	stack_b->curlen = stack_a->inilen;
+	stack_b->curlen = 0;
 	if (!checkArgs(stack_a))
 		return (error(stack_a, stack_b));
 	push_swap(stack_a, stack_b);
+	/* pb(stack_a, stack_b);
 	printArray(stack_a);
+	printArrayb(stack_b);
+	pb(stack_a, stack_b);
+	printArray(stack_a);
+	printArrayb(stack_b);
+	sa(stack_a);
+	printArray(stack_a);
+	printArrayb(stack_b);
+	ra(stack_a);
+	 printArray(stack_a);
+	printArrayb(stack_b);
+	pa(stack_a, stack_b);
+	printArray(stack_a);
+	printArrayb(stack_b);
+	ra(stack_a);
+	printArray(stack_a);
+	printArrayb(stack_b);
+	ra(stack_a);
+	printArray(stack_a);
+	printArrayb(stack_b);
+	ra(stack_a); */
 	free(stack_b->array);
 	free(stack_a->array);
 	free(stack_a);
 	free(stack_b);
 	return (0);
 }
+
+/* pb
+pb
+sa
+ra
+pa
+ra
+ra
+ra
+ra */
+
