@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:28 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/26 17:24:27 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:25:20 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	stack_b->curlen++;
 	i = stack_b->curlen - 1;
-	if (!checkIfArray(stack_a->array))
-		return (1);
 	temp = stack_a->array[0];
 	while (i >= 0)
 	{

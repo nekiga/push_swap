@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/26 20:27:00 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:45:33 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	bubblesort(t_stack_a *stack_a, long *array)
 	int		j;
 	long	temp;
 
-	i = stack_a->inilen - 1;
+	i = stack_a->inilen;
 	while (i > 0)
 	{
 		j = 0;
@@ -100,18 +100,21 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 	array = (long *)malloc(sizeof(long) * stack_a->inilen);
 	if (!array)
 		error(stack_a, stack_b);
-	while (i < stack_a->inilen - 1)
+	while (i < stack_a->inilen)
 		array[i] = stack_a->array[i++];
-	i = 0;
 	bubblesort(stack_a, array);
 	stack_b->call = true;
-	while (chunk <= 100)
+	//printf("bool is: %i\n", stack_b->call);
+	while (chunk < 150)
 	{
+		i = 0;
 		pushchunk(stack_a, stack_b, chunk, array);
 		while (i++ <= chunk)
 			smartpush(stack_a, stack_b);
 		chunk += 50;
 	}
+ 	while (stack_a->array[0] != 0 || (chunk-- / 2) + 1)
+		ra(stack_a); 
 	free(array);
 }
 //Finds most otimized path to push either the biggest or smallest number to the top
@@ -181,24 +184,31 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 			rrb(stack_b);
 		pa(stack_a, stack_b);
 	}
+	
 }
 //pushes all members of chunk to stack_b
 void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 		long *array)
 {
 	long		hold;
-
+	long		oldhold;
 	static long	i;
+	
 
+	hold = array[chunk];
+	if (stack_b->call == false)
+		oldhold = 50;
 	if (stack_b->call == true)
 	{
 		i = 0;
-		stack_b->call== false;
-	}
-	hold = array[chunk - 1];
-	while ( i <= chunk)
+		oldhold = 0;
+		stack_b->call = false;
+	} 
+
+	while ( i <= chunk * 2)
 	{
-		if (stack_a->array[0] < hold)
+		//printf("\thold is %ld an chunk is: %ld and oldhold is: %ld \n", hold, chunk, oldhold);
+		if (stack_a->array[0] <= hold && stack_a->array[0] >= oldhold)
 		{	
 				pb(stack_a, stack_b);
 		}
@@ -216,11 +226,9 @@ long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 	i = 0;
 	if (flag == 'a')
 	{
-		if (stack_a->curlen == 0)
-			return (0);
 		min = stack_a->array[0];
 		stack_a->smallest = 0;
-		while (i < stack_a->curlen)
+		while (i < stack_a->curlen + 1)
 		{
 			if (stack_a->array[i] < min)
 			{
@@ -231,11 +239,9 @@ long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 		}
 		return (min);
 	}
-	if (stack_b->curlen == 0)
-		return (0);
 	min = stack_b->array[0];
 	stack_b->smallest = 0;
-	while (i < stack_b->curlen)
+	while (i < stack_b->curlen + 1)
 	{
 		if (stack_b->array[i] < min)
 		{
@@ -256,11 +262,9 @@ long	findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 	i = 0;
 	if (flag == 'a')
 	{
-		if (stack_a->curlen == 0)
-			return (0);
 		max = stack_a->array[0];
 		stack_a->biggest = 0;
-		while (i < stack_a->curlen)
+		while (i < stack_a->curlen + 1)
 		{
 			if (stack_a->array[i] > max)
 			{
@@ -270,12 +274,10 @@ long	findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 			i++;
 		}
 		return (max);
-	}
-	if (stack_b->curlen == 0)
-		return (0);
+	}	
 	max = stack_b->array[0];
 	stack_b->biggest = 0;
-	while (i < stack_b->curlen)
+	while (i < stack_b->curlen + 1)
 	{
 		if (stack_b->array[i] > max)
 		{
