@@ -6,7 +6,7 @@ void    printArray(t_stack_a *stack_a)
 
     i = 0;
     printf("\nstack a: ");
-    while (i != stack_a->inilen)
+    while (i != stack_a->curlen)
     {
         printf("[%ld]",stack_a->array[i]);
         i++;
@@ -20,10 +20,17 @@ void    printArrayb(t_stack_b *stack_b)
 
     i = 0;
     printf("\nstack b: ");
-    while (i != stack_b->inilen)
+    while (i <= stack_b->curlen)
     {
         printf("[%ld]", stack_b->array[i]);
         i++;
     }
     printf("\n");
+}
+
+bool checklenght(t_stack_a *stack_a,t_stack_b *stack_b)
+{
+   if (stack_a->curlen + stack_b->curlen != 100)
+        return (false);
+    return (true);
 }

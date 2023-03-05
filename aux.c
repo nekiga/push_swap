@@ -219,3 +219,12 @@ void zero(t_stack_a *stack_a, t_stack_b *stack_b)
 	while (i < stack_b->inilen)
 		stack_b->array[i++] = 0;
 }
+
+long m_abs(long x)
+{
+	if (x == 0)
+		return (0);
+	if (x < 0)
+		x *= -1;
+	return (x);
+}
