@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/02/25 20:25:25 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:59:43 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ bool		ft_isdigit(char c);
 bool		onlydigit(int argc, char **argv);
 bool		checkSorted(t_stack_a *stack_a);
 void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
+long 		m_abs(long x);
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);
@@ -74,10 +75,12 @@ void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 				long *array);
 void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b);
 long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
-long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
+long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
 void		pushtop(t_stack_a *stack_a, long i);
+void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar, char flag);
 // tester functions
 void		printArray(t_stack_a *stack_a);
 void		printArrayb(t_stack_b *stack_b);
+bool 		checklenght(t_stack_a *stack_a,t_stack_b *stack_b);
 
 #endif

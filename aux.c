@@ -21,7 +21,7 @@ bool onlydigit(int argc, char **argv)
 		while (j != ft_strlen(argv[i] - 1))
 		{
 			
-			 if (j = 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
+			 if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
 				j++; 
 			if (ft_isdigit(argv[i][j]) == false)
 				return (false);
@@ -60,15 +60,7 @@ void	ft_putError(char *str)
 		ft_putCharE(str[i++]);
 }
 
-//calculates lenght of array
-long getArrayLen(long *array)
-{
-	long len;
-	
-	len = sizeof(array) / sizeof(long);
-	return (len);
-	
-}
+
 // takes in a string and turns it into longs
 long	ft_atol(const char *str)
 {
@@ -218,4 +210,22 @@ void zero(t_stack_a *stack_a, t_stack_b *stack_b)
 		error(stack_a, stack_b);
 	while (i < stack_b->inilen)
 		stack_b->array[i++] = 0;
+}
+
+long m_abs(long x)
+{
+	if (x == 0)
+		return (0);
+	if (x < 0)
+		x *= -1;
+	return (x);
+}
+//calculates lenght of array
+long getArrayLen(long *array)
+{
+	long len;
+	
+	len = sizeof(array) / sizeof(long);
+	return (len);
+	
 }
