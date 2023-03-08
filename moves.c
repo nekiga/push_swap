@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:28 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/05 16:14:22 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:25:20 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,13 @@ int	pa(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	temp;
 	long	i;
 
-	if (stack_b->curlen == 0)
-		return (0);
 	stack_a->curlen++;
 	i = stack_a->curlen - 1;
 	temp = stack_b->array[0];
-	
 	while (i > 0)
 	{
 		stack_a->array[i] = stack_a->array[i - 1];
+		//printf("in func pa i = %ld\n in func pa stack_a->array[i] = %ld\n", i , stack_a->array[i]);
 		i--;
 	}
 	stack_a->array[0] = temp;
@@ -83,13 +81,8 @@ int	pa(t_stack_a *stack_a, t_stack_b *stack_b)
 		stack_b->array[i] = stack_b->array[i + 1];
 		i++;
 	}
-	if (stack_b->curlen != 0)
-	{
-		stack_b->array[stack_b->curlen - 1] = 0;
-		stack_b->curlen--;
-	}
-	else
-		stack_b->array[stack_b->curlen] = 0;
+	stack_b->array[stack_b->curlen - 1] = 0;
+	stack_b->curlen--;
 	write(1, "pa\n", 3);
 	return (0);
 }
@@ -101,8 +94,7 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	long	temp;
 	long	i;
-	if (stack_a->curlen == 0)
-		return (0);
+
 	stack_b->curlen++;
 	i = stack_b->curlen - 1;
 	temp = stack_a->array[0];
@@ -118,13 +110,8 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 		stack_a->array[i] = stack_a->array[i + 1];
 		i++;
 	}
-	if (stack_a->curlen != 0)
-	{
-		stack_a->array[stack_a->curlen - 1] = 0;
-		stack_a->curlen--;
-	}
-	else
-		stack_a->array[stack_a->curlen] = 0;
+	stack_a->array[stack_a->curlen - 1] = 0;
+	stack_a->curlen--;
 	write(1, "pb\n", 3);
 	return (0);
 }
