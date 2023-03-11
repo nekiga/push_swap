@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/08 17:18:13 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:08:29 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,11 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 	i = 0;
 	j = 0;
 	chunk = 50;
+	//printf("inilen: %ld\n", stack_a->inilen);
 	array = malloc(sizeof(long) * stack_a->inilen);
 	 if (!array)
 		error(stack_a, stack_b);
-	while (i < stack_a->inilen - 1)
+	while (i < stack_a->inilen)
 	{
 		array[i] = stack_a->array[i];
 		i++;
@@ -117,6 +118,8 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 		pushchunk(stack_a, stack_b, chunk, array);
 		while (i++ <= chunk)
 			smartpush(stack_a, stack_b);
+			while (stack_a->array[0] != findsmallest(stack_a, stack_b, 'a', 50))
+		ra(stack_a);  
 		chunk += 50;
 	}
 	while (stack_a->array[0] != findsmallest(stack_a, stack_b, 'a', 50))
@@ -226,8 +229,9 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
 		}
 		else
 		{
-			findsmallest(stack_a, stack_b, 'a', chunk);
-			smartTop(stack_a, stack_b, stack_a->smallest, 'a');
+			/* findsmallest(stack_a, stack_b, 'a', chunk);
+			smartTop(stack_a, stack_b, stack_a->smallest, 'a'); */
+			ra(stack_a);
 		}
 		i++;
 	}
@@ -244,7 +248,7 @@ long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk)
 	{
 		min = stack_a->array[0];
 		stack_a->smallest = 0;
-		while (i < stack_a->curlen)
+		while (i < stack_a->curlen && chunk < stack_a->curlen)
 		{
 			if (stack_a->array[chunk] < min)
 			{

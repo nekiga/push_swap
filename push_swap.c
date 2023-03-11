@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/03 19:33:03 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 13:45:22 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ int	main(int argc, char **argv)
 	stack_b->curlen = 0;
 	if (!checkArgs(stack_a))
 		return (error(stack_a, stack_b));
+	zero(stack_a, stack_b);
 	push_swap(stack_a, stack_b);
-	printArray(stack_a);
-	printArrayb(stack_b);
 	free(stack_b->array);
 	free(stack_a->array);
 	free(stack_a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/08 16:59:43 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 13:57:08 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

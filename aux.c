@@ -97,9 +97,10 @@ long 	*mArray(int argc, char **argv)
 	len = 0;
 	while (i != argc)
 	{
-		len += ft_strlen(argv[i]);
+		len++;
 		i++;
 	}
+	//printf("len: %ld\n", len);
 	i = 1;
 	array = malloc(sizeof(long) * len);
 	if (!array)
@@ -208,8 +209,11 @@ void zero(t_stack_a *stack_a, t_stack_b *stack_b)
 	i = 0;
 	if (!stack_b->array)
 		error(stack_a, stack_b);
-	while (i < stack_b->inilen)
-		stack_b->array[i++] = 0;
+	while (i < stack_b->inilen - 1)
+	{
+		stack_b->array[i] = 0;
+		i++;
+	}
 }
 
 long m_abs(long x)

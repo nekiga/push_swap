@@ -20,7 +20,7 @@ void    printArrayb(t_stack_b *stack_b)
 
     i = 0;
     printf("\nstack b: ");
-    while (i != stack_b->inilen)
+    while (i != stack_b->inilen - 1)
     {
         printf("[%ld]", stack_b->array[i]);
         i++;
