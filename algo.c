@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 15:40:38 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:25:44 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,23 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 	i = 0;
 	j = 0;
 	chunk = 50;
-	//printf("inilen: %ld\n", stack_a->inilen);
-	array = malloc(sizeof(long) * stack_a->inilen);
-	 if (!array)
-		error(stack_a, stack_b);
-	while (i < stack_a->inilen)
-	{
-		array[i] = stack_a->array[i];
-		i++;
-	}
-	bubblesort(stack_a, array);
+	makeauxarray(stack_a, stack_b);
 	stack_b->call = true;
-	while (chunk < 101)
+	while (chunk < stack_a->inilen + 1)
 	{
 		i = 0;
-		pushchunk(stack_a, stack_b, chunk, array);
+		pushchunk(stack_a, stack_b, chunk);
 		while (i++ <= chunk)
 			smartpush(stack_a, stack_b);
-			while (stack_a->array[0] != findsmallest(stack_a, stack_b, 'a', 50))
-		ra(stack_a);  
+		//printf("after smartpush\n");
+		if (chunk == 100)
+			while (stack_a->array[0] != stack_a->auxarray[0] && stack_a->curlen > 50)
+				ra(stack_a);  
 		chunk += 50;
 	}
-	free(array);
+
 }
+
 //Finds most otimized path to push either the biggest or smallest number to the top
 char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 {
@@ -136,8 +130,8 @@ char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	smallnum = findsmallest(stack_a, stack_b, 'b', 50);
 	bignum = findbiggest(stack_a, stack_b, 'b');
-	msmall = m_abs(stack_b->smallest - stack_b->curlen + 1);
-	mbig = m_abs(stack_b->biggest - stack_b->curlen + 1);
+	msmall = m_abs(stack_b->smallest - stack_b->curlen) + 1;
+	mbig = m_abs(stack_b->biggest - stack_b->curlen) + 1;
 	if (stack_b->smallest < msmall)
 	{
 		if (stack_b->smallest < stack_b->biggest)
@@ -201,35 +195,33 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 	}
 }
 //pushes all members of chunk to stack_b
-void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
-		long *array)
+void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 {
 	long		hold;
 	long		oldhold;
 	static long	i;
 
-	hold = array[chunk - 1];
+	hold = stack_a->auxarray[chunk - 1];
 	 if (stack_b->call == false)
-		oldhold = array[49]; 
+		oldhold = stack_a->auxarray[(stack_a->inilen / 2) - 1]; 
 	if (stack_b->call == true)
 	{
 		i = 0;
 		oldhold = 0;
 		stack_b->call = false;
 	}
-
 	while (i <= chunk * 2)
 	{
 	
 		if (stack_a->array[0] <= hold  && stack_a->array[0] >= oldhold )
 		{
+		
 			pb(stack_a, stack_b);
 		}
 		else
 		{
-			/* findsmallest(stack_a, stack_b, 'a', chunk);
-			smartTop(stack_a, stack_b, stack_a->smallest, 'a'); */
-			ra(stack_a);
+			if (stack_a->curlen > 50)
+				ra(stack_a);
 		}
 		i++;
 	}
@@ -316,7 +308,7 @@ void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 	findsmallest(stack_a, stack_b, 'a', 50);
 	pos = stack_a->smallest;
 	temp = stack_a->array[pos];
-	if (stack_a->curlen - pos < stack_a->curlen / 2)
+	if (pos < m_abs(stack_a->curlen - pos))
 		while (stack_a->array[0] != temp)
 			ra(stack_a);
 	else
@@ -330,26 +322,10 @@ void	smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar, char flag)
 {
 	long	hold;
 
-
-	if (flag == 'a')
-	{
-		hold = stack_a->array[tar];
-		if (m_abs(tar < stack_a->curlen - tar))
-		{
-			while (stack_a->array[0] != hold)
-				ra(stack_a);
-		}
-		else
-		{
-			while (stack_a->array[0] != hold)
-				rra(stack_a);
-		}
-		
-	}
-	else if (flag == 'b')
+if (flag == 'b')
 	{
 		hold = stack_b->array[tar];
-		if (m_abs(tar < stack_b->curlen - tar))
+		if (tar < m_abs(stack_b->curlen - tar))
 		{
 			while (stack_b->array[0] != hold)
 				rb(stack_b);

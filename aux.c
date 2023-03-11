@@ -183,6 +183,7 @@ int	error(t_stack_a *stack_a, t_stack_b *stack_b)
 	ft_putCharE('\n');
 	free(stack_b->array);
     free(stack_a->array);
+	free(stack_a->auxarray);
 	free(stack_a);
 	free(stack_b);
 	return(1);
@@ -232,4 +233,20 @@ long getArrayLen(long *array)
 	len = sizeof(array) / sizeof(long);
 	return (len);
 	
+}
+
+long *makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	int	i;
+	
+	i = 0;
+	stack_a->auxarray = malloc(sizeof(long) * stack_a->inilen);
+	 if (!stack_a->auxarray)
+		error(stack_a, stack_b);
+	while (i < stack_a->inilen)
+	{
+		stack_a->auxarray[i] = stack_a->array[i];
+		i++;
+	}
+	bubblesort(stack_a, stack_a->auxarray);
 }

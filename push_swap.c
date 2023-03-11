@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 13:45:22 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:29:34 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 		sort3(stack_a, stack_b);
 	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
-	else if(stack_a->inilen == 100)
+	else if(stack_a->inilen <= 100)
 		sort100(stack_a, stack_b);
 	else
 		printf("DID NOT MEET ANY CONDITIONS IN PUSH_SWAP FUNC\n");
@@ -35,32 +35,38 @@ int	main(int argc, char **argv)
 {
 	t_stack_a	*stack_a;
 	t_stack_b	*stack_b;
-	long		i;
 
-	i = 0;
 	stack_a = malloc(sizeof(t_stack_a));
 	stack_b = malloc(sizeof(t_stack_b));
-	if (argc == 1)
-		return (error(stack_a, stack_b));
-	if (onlydigit(argc, argv) == false)
-		return (error(stack_a, stack_b));
-	stack_a->array = mArray(argc, argv);
-	if (!stack_a->array)
-		return (error(stack_a, stack_b));
-	stack_b->array = malloc(sizeof(long) * argc - 1);
-	if (!stack_b->array)
-		return (error(stack_a, stack_b));
-	stack_a->inilen = argc - 1;
-	stack_a->curlen = stack_a->inilen;
-	stack_b->inilen = stack_a->inilen;
-	stack_b->curlen = 0;
-	if (!checkArgs(stack_a))
-		return (error(stack_a, stack_b));
-	zero(stack_a, stack_b);
+	init(stack_a, stack_b, argc, argv);
 	push_swap(stack_a, stack_b);
 	free(stack_b->array);
+	free(stack_a->auxarray);
 	free(stack_a->array);
 	free(stack_a);
 	free(stack_b);
 	return (0);
 }
+
+int init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv)
+{
+	stack_a->array = mArray(argc, argv);
+	if (!stack_a->array)
+		return (error(stack_a, stack_b));
+	stack_b->array = malloc(sizeof(long) * argc - 1);
+	if (argc == 1)
+		return (error(stack_a, stack_b));
+	if (!stack_b->array)
+		return (error(stack_a, stack_b));
+	if (onlydigit(argc, argv) == false)
+		return (error(stack_a, stack_b));
+	if (!checkArgs(stack_a))
+		return (error(stack_a, stack_b));
+	stack_a->inilen = argc - 1;
+	stack_a->curlen = stack_a->inilen;
+	stack_b->inilen = stack_a->inilen;
+	stack_b->curlen = 0;
+	zero(stack_a, stack_b);
+	return (0);
+}
+

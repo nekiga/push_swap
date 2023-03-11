@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 13:57:08 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:27:34 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct stack_a
 {
 	long	*array;
+	long	*auxarray;
 	long	inilen;
 	long	curlen;
 	long	smallest;
@@ -53,6 +54,9 @@ bool		onlydigit(int argc, char **argv);
 bool		checkSorted(t_stack_a *stack_a);
 void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
 long 		m_abs(long x);
+long 		*makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b);
+int 	init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
+void	bubblesort(t_stack_a *stack_a, long *array);
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);
@@ -71,8 +75,7 @@ void		sort5(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort100(t_stack_a *stack_a, t_stack_b *stack_b);
 void		totop(t_stack_a *stack_a, t_stack_b *stack_b);
 char		findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b);
-void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
-				long *array);
+void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b);
 long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
 long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
