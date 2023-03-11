@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 15:08:29 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:40:38 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 		ra(stack_a);  
 		chunk += 50;
 	}
-	while (stack_a->array[0] != findsmallest(stack_a, stack_b, 'a', 50))
-		ra(stack_a);  
 	free(array);
 }
 //Finds most otimized path to push either the biggest or smallest number to the top
