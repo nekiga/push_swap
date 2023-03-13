@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 18:25:44 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:47:36 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,33 +93,43 @@ void	bubblesort(t_stack_a *stack_a, long *array)
 }
 void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 {
+	bool	last;
 	long	i;
-	long	j;
 	long	*array;
 	long	chunk;
+	long	nchunk;
 
 	i = 0;
-	j = 0;
 	chunk = 50;
-	makeauxarray(stack_a, stack_b);
+	nchunk = calchunk(stack_a, 50);
+	last = false;
 	stack_b->call = true;
-	while (chunk < stack_a->inilen + 1)
+	while (!last)
 	{
 		i = 0;
-		pushchunk(stack_a, stack_b, chunk);
-		while (i++ <= chunk)
-			smartpush(stack_a, stack_b);
-		//printf("after smartpush\n");
-		if (chunk == 100)
-			while (stack_a->array[0] != stack_a->auxarray[0] && stack_a->curlen > 50)
-				ra(stack_a);  
-		chunk += 50;
+		if (nchunk != 50)
+		{
+			last = true;
+			pushchunk(stack_a, stack_b, stack_a->inilen, 50);
+			while (i++ <= nchunk)
+				smartpush(stack_a, stack_b, nchunk);
+		}
+		else
+		{
+			pushchunk(stack_a, stack_b, chunk, chunk - 50);
+			nchunk = calchunk(stack_a, 50);
+			while (i++ <= chunk)
+				smartpush(stack_a, stack_b, chunk);
+			chunk += chunk;
+		}
 	}
-
+			while (stack_a->array[0] != stack_a->auxarray[0])
+				ra(stack_a);  
+	
 }
 
 //Finds most otimized path to push either the biggest or smallest number to the top
-char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
+char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 {
 	long	msmall;
 	long	mbig;
@@ -128,7 +138,7 @@ char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 	char	flag;
 
 
-	smallnum = findsmallest(stack_a, stack_b, 'b', 50);
+	smallnum = findsmallest(stack_a, stack_b, 'b', chunk);
 	bignum = findbiggest(stack_a, stack_b, 'b');
 	msmall = m_abs(stack_b->smallest - stack_b->curlen) + 1;
 	mbig = m_abs(stack_b->biggest - stack_b->curlen) + 1;
@@ -162,14 +172,14 @@ char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 // vai receber uma flag que lhe vai dizer que numero mandar com ra ou rra para o top
 // vai buscar o numero
 // vai fazer ra ou rra
-void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
+void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 {
 	char	flag;
 	long	smallest;
 	long	biggest;
 
-	flag = findsmartpush(stack_a, stack_b);
-	smallest = findsmallest(stack_a, stack_b, 'b', 50);
+	flag = findsmartpush(stack_a, stack_b, chunk);
+	smallest = findsmallest(stack_a, stack_b, 'b', chunk);
 	biggest = findbiggest(stack_a, stack_b, 'b');
 	if (flag == 's')
 	{
@@ -195,15 +205,16 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b)
 	}
 }
 //pushes all members of chunk to stack_b
-void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
+void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk)
 {
 	long		hold;
 	long		oldhold;
+	long		temp;
 	static long	i;
-
+	// chunk 73, old chunk 50
 	hold = stack_a->auxarray[chunk - 1];
 	 if (stack_b->call == false)
-		oldhold = stack_a->auxarray[(stack_a->inilen / 2) - 1]; 
+		oldhold = stack_a->auxarray[oldchunk - 1]; 
 	if (stack_b->call == true)
 	{
 		i = 0;
@@ -212,16 +223,23 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 	}
 	while (i <= chunk * 2)
 	{
-	
+	//                           72                            49
 		if (stack_a->array[0] <= hold  && stack_a->array[0] >= oldhold )
 		{
 		
 			pb(stack_a, stack_b);
 		}
-		else
+		else if (stack_a->inilen == 100)
 		{
+			// curlen is 50
 			if (stack_a->curlen > 50)
 				ra(stack_a);
+		}
+		else
+		{
+			if (stack_a->array[0] != stack_a->auxarray[0])
+				ra(stack_a);
+			
 		}
 		i++;
 	}

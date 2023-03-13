@@ -250,3 +250,11 @@ long *makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
 	}
 	bubblesort(stack_a, stack_a->auxarray);
 }
+
+long	calchunk(t_stack_a *stack_a, long nrmchunk)
+{
+	if (stack_a->curlen < nrmchunk)
+		return (stack_a->curlen);
+	else
+		return (nrmchunk);
+}

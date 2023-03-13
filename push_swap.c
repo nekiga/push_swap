@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 17:29:34 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:40:47 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv)
 	stack_a->curlen = stack_a->inilen;
 	stack_b->inilen = stack_a->inilen;
 	stack_b->curlen = 0;
+	makeauxarray(stack_a, stack_b);
 	zero(stack_a, stack_b);
 	return (0);
 }

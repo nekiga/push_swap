@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/11 17:27:34 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:48:05 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct stack_b
 
 //base functions
 long		*mArray(int argc, char **argv);
+long 		*makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b);
 long		ft_atol(const char *str);
 long		ft_strlen(char *str);
 long		getArrayLen(long *array);
@@ -54,9 +55,9 @@ bool		onlydigit(int argc, char **argv);
 bool		checkSorted(t_stack_a *stack_a);
 void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
 long 		m_abs(long x);
-long 		*makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b);
-int 	init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
-void	bubblesort(t_stack_a *stack_a, long *array);
+int 		init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
+void		bubblesort(t_stack_a *stack_a, long *array);
+long		calchunk(t_stack_a *stack_a, long nrmchunk);
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);
@@ -74,9 +75,9 @@ void		sort3(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort5(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort100(t_stack_a *stack_a, t_stack_b *stack_b);
 void		totop(t_stack_a *stack_a, t_stack_b *stack_b);
-char		findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b);
-void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
-void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b);
+char		findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chun);
+void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk);
+void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
 long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
 void		pushtop(t_stack_a *stack_a, long i);
@@ -84,6 +85,5 @@ void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar, char flag);
 // tester functions
 void		printArray(t_stack_a *stack_a);
 void		printArrayb(t_stack_b *stack_b);
-bool 		checklenght(t_stack_a *stack_a,t_stack_b *stack_b);
 
 #endif
