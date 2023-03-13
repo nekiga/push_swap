@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 12:48:05 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:30:51 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct stack_b
 	long	smallest;
 	long	biggest;
 	bool	call;
+	int		multiplier;
 
 }			t_stack_b;
 
@@ -81,7 +82,7 @@ void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
 long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
 void		pushtop(t_stack_a *stack_a, long i);
-void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar, char flag);
+void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
 // tester functions
 void		printArray(t_stack_a *stack_a);
 void		printArrayb(t_stack_b *stack_b);

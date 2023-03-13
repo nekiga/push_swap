@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 13:47:36 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:05:01 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,37 +95,44 @@ void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	bool	last;
 	long	i;
-	long	*array;
+	long	stdchunk;
 	long	chunk;
 	long	nchunk;
 
 	i = 0;
-	chunk = 50;
-	nchunk = calchunk(stack_a, 50);
+	stack_b->multiplier = 5;
+	if (stack_a->inilen < 250)
+		stack_b->multiplier = 2;
+	stdchunk = stack_a->inilen / stack_b->multiplier;
+	chunk = stdchunk;
+	nchunk = calchunk(stack_a, stdchunk);
 	last = false;
 	stack_b->call = true;
-	while (!last)
+	while (!last && chunk <= stack_a->inilen)
 	{
 		i = 0;
-		if (nchunk != 50)
+		if (nchunk != stdchunk)
 		{
 			last = true;
-			pushchunk(stack_a, stack_b, stack_a->inilen, 50);
-			while (i++ <= nchunk)
+			pushchunk(stack_a, stack_b, stack_a->inilen, stdchunk);
+			while (i++ <= nchunk )
 				smartpush(stack_a, stack_b, nchunk);
 		}
 		else
 		{
-			pushchunk(stack_a, stack_b, chunk, chunk - 50);
-			nchunk = calchunk(stack_a, 50);
-			while (i++ <= chunk)
+			pushchunk(stack_a, stack_b, chunk, chunk - stdchunk);
+			nchunk = calchunk(stack_a, stdchunk);
+			while (i++ <= stdchunk)
 				smartpush(stack_a, stack_b, chunk);
-			chunk += chunk;
+			//printf("it broke here 3\n");
+			chunk += stdchunk;
 		}
-	}
+		if (stack_b->multiplier != 2)
 			while (stack_a->array[0] != stack_a->auxarray[0])
-				ra(stack_a);  
-	
+				ra(stack_a); 
+	}
+			 while (stack_a->array[0] != stack_a->auxarray[0])
+				ra(stack_a); 
 }
 
 //Finds most otimized path to push either the biggest or smallest number to the top
@@ -183,24 +190,24 @@ void	smartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 	biggest = findbiggest(stack_a, stack_b, 'b');
 	if (flag == 's')
 	{
-		smartTop(stack_a, stack_b, stack_b->smallest, 'b');
+		smartTop(stack_a, stack_b, stack_b->smallest);
 		pa(stack_a, stack_b);
 		ra(stack_a);
 	}
 	else if (flag == 'b')
 	{
-		smartTop(stack_a, stack_b, stack_b->biggest, 'b');
+		smartTop(stack_a, stack_b, stack_b->biggest);
 		pa(stack_a, stack_b);
 	}
 	else if (flag == 'S')
 	{
-		smartTop(stack_a, stack_b, stack_b->smallest, 'b');
+		smartTop(stack_a, stack_b, stack_b->smallest);
 		pa(stack_a, stack_b);
 		ra(stack_a);
 	}
 	else if (flag == 'B')
 	{
-		smartTop(stack_a, stack_b, stack_b->biggest, 'b');
+		smartTop(stack_a, stack_b, stack_b->biggest);
 		pa(stack_a, stack_b);
 	}
 }
@@ -209,9 +216,8 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk
 {
 	long		hold;
 	long		oldhold;
-	long		temp;
 	static long	i;
-	// chunk 73, old chunk 50
+	
 	hold = stack_a->auxarray[chunk - 1];
 	 if (stack_b->call == false)
 		oldhold = stack_a->auxarray[oldchunk - 1]; 
@@ -221,25 +227,18 @@ void	pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk
 		oldhold = 0;
 		stack_b->call = false;
 	}
-	while (i <= chunk * 2)
+	while (i <= chunk * stack_b->multiplier)
 	{
-	//                           72                            49
 		if (stack_a->array[0] <= hold  && stack_a->array[0] >= oldhold )
 		{
 		
 			pb(stack_a, stack_b);
 		}
-		else if (stack_a->inilen == 100)
-		{
-			// curlen is 50
-			if (stack_a->curlen > 50)
-				ra(stack_a);
-		}
 		else
 		{
-			if (stack_a->array[0] != stack_a->auxarray[0])
+			// curlen is 50
+			if (stack_a->curlen >= stack_a->inilen / stack_b->multiplier)
 				ra(stack_a);
-			
 		}
 		i++;
 	}
@@ -251,12 +250,11 @@ long	findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk)
 	long	min;
 
 	i = 0;
-	chunk -= 50;
 	if (flag == 'a')
 	{
 		min = stack_a->array[0];
 		stack_a->smallest = 0;
-		while (i < stack_a->curlen && chunk < stack_a->curlen)
+		while (i < stack_a->curlen && chunk <= stack_a->curlen)
 		{
 			if (stack_a->array[chunk] < min)
 			{
@@ -323,7 +321,7 @@ void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 	long	pos;
 	long	temp;
 
-	findsmallest(stack_a, stack_b, 'a', 50);
+	findsmallest(stack_a, stack_b, 'a', stack_a->inilen / stack_b->multiplier);
 	pos = stack_a->smallest;
 	temp = stack_a->array[pos];
 	if (pos < m_abs(stack_a->curlen - pos))
@@ -336,12 +334,10 @@ void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 
 
 
-void	smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar, char flag)
+void	smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar)
 {
 	long	hold;
 
-if (flag == 'b')
-	{
 		hold = stack_b->array[tar];
 		if (tar < m_abs(stack_b->curlen - tar))
 		{
@@ -353,9 +349,5 @@ if (flag == 'b')
 			while (stack_b->array[0] != hold)
 				rrb(stack_b);
 		}
-	}
-	else
-	{
-		error(stack_a, stack_b);
-	}
+
 }

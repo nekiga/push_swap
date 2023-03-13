@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 10:40:47 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:32:51 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 		sort3(stack_a, stack_b);
 	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
-	else if(stack_a->inilen <= 100)
+	else 
 		sort100(stack_a, stack_b);
-	else
-		printf("DID NOT MEET ANY CONDITIONS IN PUSH_SWAP FUNC\n");
+
 }
 
 // The function main initializes the stacks and sends them to push swap,
