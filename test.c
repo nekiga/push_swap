@@ -6,7 +6,7 @@ void    printArray(t_stack_a *stack_a)
 
     i = 0;
     printf("\nstack a: ");
-    while (i != stack_a->inilen)
+    while (i != stack_a->inilen - 1)
     {
         printf("[%ld]",stack_a->array[i]);
         i++;
