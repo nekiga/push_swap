@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 19:30:51 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/15 12:55:27 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
 long 		m_abs(long x);
 int 		init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
 void		bubblesort(t_stack_a *stack_a, long *array);
-long		calchunk(t_stack_a *stack_a, long nrmchunk);
+long		calchunk(t_stack_a *stack_a, long nrmchunk, long chunk);
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);
@@ -75,6 +75,7 @@ void		sort2(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort3(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort5(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort100(t_stack_a *stack_a, t_stack_b *stack_b);
+void		sort500(t_stack_a *stack_a, t_stack_b *stack_b);
 void		totop(t_stack_a *stack_a, t_stack_b *stack_b);
 char		findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chun);
 void		pushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk);
@@ -83,6 +84,7 @@ long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
 long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
 void		pushtop(t_stack_a *stack_a, long i);
 void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
+void	npushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk);
 // tester functions
 void		printArray(t_stack_a *stack_a);
 void		printArrayb(t_stack_b *stack_b);

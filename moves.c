@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:28 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 11:23:44 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:37:22 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	pb(t_stack_a *stack_a, t_stack_b *stack_b)
 	while (i >= 0)
 	{
 		stack_b->array[i + 1] = stack_b->array[i];
-		i--;
+		i--;	
 	}
 	stack_b->array[0] = temp;
 	i = 0;

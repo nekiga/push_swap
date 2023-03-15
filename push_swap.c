@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/13 14:32:51 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:17:07 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 		sort3(stack_a, stack_b);
 	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
-	else 
-		sort100(stack_a, stack_b);
+	 else if(stack_a->inilen < 201)
+		sort100(stack_a, stack_b);  
+	else
+		sort500(stack_a, stack_b);
 
 }
 
@@ -39,6 +41,8 @@ int	main(int argc, char **argv)
 	stack_b = malloc(sizeof(t_stack_b));
 	init(stack_a, stack_b, argc, argv);
 	push_swap(stack_a, stack_b);
+	printArray(stack_a);
+	printArrayb(stack_b);
 	free(stack_b->array);
 	free(stack_a->auxarray);
 	free(stack_a->array);
