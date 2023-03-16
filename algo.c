@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/15 15:41:48 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:13:29 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ bool	last;
 	i = 0;
 	stack_b->multiplier = 2;
 	stdchunk = stack_a->inilen / stack_b->multiplier;
+	/* if (stack_a->inilen == 100)
+		stdchunk = 60; */
 	chunk = stdchunk;
 	nchunk = calchunk(stack_a, stdchunk, chunk);
 	last = false;
@@ -124,9 +126,9 @@ bool	last;
 			chunk += stdchunk;
 			nchunk = calchunk(stack_a, stdchunk, chunk);
 		}
+	}
 		while (stack_a->array[0] != stack_a->auxarray[0])
 				ra(stack_a); 
-	}
 		
 }
 void	sort500(t_stack_a *stack_a, t_stack_b *stack_b)
@@ -172,44 +174,44 @@ void	sort500(t_stack_a *stack_a, t_stack_b *stack_b)
 
 char	findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 {
-	long	msmall;
-	long	mbig;
-	long	smallnum;
-	long	bignum;
+	long	sdown;
+	long	bdown;
+	long 	paths;
+	long pathb;
 	char	flag;
 
 
-	smallnum = findsmallest(stack_a, stack_b, 'b', chunk);
-	bignum = findbiggest(stack_a, stack_b, 'b');
-	msmall = m_abs(stack_b->smallest - stack_b->curlen) + 1;
-	mbig = m_abs(stack_b->biggest - stack_b->curlen) + 1;
-	if (stack_b->smallest < msmall)
-	{
-		if (stack_b->smallest < stack_b->biggest)
-		{
-			flag = 's';
-		}
-		else
-			flag = 'b';
-		return (flag);
-	}
-	else if (stack_b->smallest > msmall)
-	{
-		if (msmall < mbig)
-		{
-			flag = 'S';
-		}
-		else
-		{
-			flag = 'B';
-		}
-	}
+	findsmallest(stack_a, stack_b, 'b', chunk);
+	findbiggest(stack_a, stack_b, 'b');
+	sdown = stack_b->curlen - stack_b->smallest; // +1
+	bdown = stack_b->curlen - stack_b->biggest;
+	
+	if (sdown > stack_b->smallest)
+		paths = stack_b->smallest;
 	else
+		paths = sdown * -1;
+	if (bdown > stack_b->biggest)
+		pathb= stack_b->biggest;
+	else
+		pathb = bdown * -1;
+	
+	if (m_abs(paths) < m_abs(pathb))
 	{
-		flag = 's';
+		if (paths)
+			flag = 's';
+		else
+			flag = 'S';
 	}
+	else if (pathb)
+		flag = 'b';
+	else
+		flag = 'B';
+	
 	return (flag);
+	
+	
 }
+
 // vai receber uma flag que lhe vai dizer que numero mandar com ra ou rra para o top
 // vai buscar o numero
 // vai fazer ra ou rra
@@ -378,6 +380,8 @@ void	npushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchun
 	long	i;
 	char	flag;
 	
+	if (oldchunk == 0)
+		oldchunk++;
 	bottom = stack_a->auxarray[oldchunk - 1]; 
 	top = stack_a->auxarray[chunk - 1];
 	
@@ -392,7 +396,7 @@ void	npushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchun
 		}
 		else if (stack_a->curlen >= stack_a->inilen / stack_b->multiplier)
 		{
-			ra(stack_a);
+				ra(stack_a);
 		}
 		i++;
 	}
