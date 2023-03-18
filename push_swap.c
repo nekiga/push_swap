@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/15 15:12:15 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:54:29 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void	push_swap(t_stack_a *stack_a, t_stack_b *stack_b)
 {
-	if (checkSorted(stack_a))
-		exit(0);
-	else if (stack_a->inilen == 2)
+	if (stack_a->inilen == 2)
 		sort2(stack_a, stack_b);
 	else if (stack_a->inilen == 3)
 		sort3(stack_a, stack_b);
 	else if (stack_a->inilen == 5 || stack_a->inilen == 4)
 		sort5(stack_a, stack_b);
-	 else if(stack_a->inilen < 201)
+	 else if(stack_a->inilen <= 200)
 		sort100(stack_a, stack_b);  
 	else
 		sort500(stack_a, stack_b);

@@ -124,20 +124,6 @@ long	ft_strlen(char *str)
 	return (j);
 }
 
-//check if array is empty
-bool	checkIfArray (long *array)
-{
-	long	len;
-
-	len = getArrayLen(array);
-	while (len)
-	{
-		if (array[len] != 0)
-			return (true);
-		len--;
-	}
-	return (false);
-}
 //receives stack and checks if its array contains duplicated digits
 bool	checkIfDouble(t_stack_a *stack_a)
 {
@@ -189,19 +175,7 @@ int	error(t_stack_a *stack_a, t_stack_b *stack_b)
 	return(1);
 }
 
-bool checkSorted(t_stack_a *stack_a)
-{
-	  int i;
 
-	  i = 0;
-    while (i < stack_a->curlen - 1)
-	 {
-        if (stack_a->array[i] > stack_a->array[i + 1])
-            return false;
-        i++;
-    }
-    return true;
-}
 
 void zero(t_stack_a *stack_a, t_stack_b *stack_b)
 {
@@ -225,17 +199,7 @@ long m_abs(long x)
 		x *= -1;
 	return (x);
 }
-//calculates lenght of array
-long getArrayLen(long *array)
-{
-	long len;
-	
-	len = sizeof(array) / sizeof(long);
-	return (len);
-	
-}
-
-long *makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
+void makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	int	i;
 	
@@ -249,6 +213,7 @@ long *makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
 		i++;
 	}
 	bubblesort(stack_a, stack_a->auxarray);
+	
 }
 
 long	calchunk(t_stack_a *stack_a, long nrmchunk, long chunk)

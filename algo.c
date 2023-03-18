@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/16 20:13:29 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/17 12:33:36 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ bool	last;
 	i = 0;
 	stack_b->multiplier = 2;
 	stdchunk = stack_a->inilen / stack_b->multiplier;
-	/* if (stack_a->inilen == 100)
-		stdchunk = 60; */
 	chunk = stdchunk;
 	nchunk = calchunk(stack_a, stdchunk, chunk);
 	last = false;
