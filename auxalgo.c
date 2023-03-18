@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 11:59:41 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 14:09:11 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:34:20 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,18 @@ long	findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag)
 
 void	totop(t_stack_a *stack_a, t_stack_b *stack_b)
 {
-	long	pos;
 	long	temp;
+	int		i;
 
-	findsmallest(stack_a, stack_b, 'a', stack_a->inilen);
-	pos = stack_a->smallest;
-	temp = stack_a->array[pos];
-	if (pos < m_abs(stack_a->curlen - pos))
+	temp = stack_a->array[0];
+	i = 0;
+	while (i < stack_a->curlen)
+	{
+		if (stack_a->array[i] < temp)
+				temp = stack_a->array[i];
+		i++;
+	}
+	if (i < m_abs(stack_a->curlen - i) + 1)
 		while (stack_a->array[0] != temp)
 			ra(stack_a);
 	else

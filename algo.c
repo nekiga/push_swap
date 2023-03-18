@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 13:52:57 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:44:57 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	sort2(t_stack_a *stack_a, t_stack_b *stack_b)
 	if (stack_a->array[0] > stack_a->array[1])
 		sa(stack_a);
 }
+void	sort2b(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	if (stack_b->array[0] > stack_b->array[1])
+		sb(stack_b);
+}
 // sorts numbers if given 3 :D
 
 void	sort3(t_stack_a *stack_a, t_stack_b *stack_b)
@@ -26,18 +31,18 @@ void	sort3(t_stack_a *stack_a, t_stack_b *stack_b)
 		&& stack_a->array[0] < stack_a->array[2])
 		sa(stack_a);
 	else if (stack_a->array[0] > stack_a->array[1]
-		&& stack_a->array[1] < stack_a->array[2]
-		&& stack_a->array[0] > stack_a->array[2])
+			&& stack_a->array[1] < stack_a->array[2]
+			&& stack_a->array[0] > stack_a->array[2])
 		ra(stack_a);
 	else if (stack_a->array[0] > stack_a->array[1]
-		&& stack_a->array[1] > stack_a->array[2])
+			&& stack_a->array[1] > stack_a->array[2])
 	{
 		sa(stack_a);
 		rra(stack_a);
 	}
 	else if (stack_a->array[0] < stack_a->array[1]
-		&& stack_a->array[1] > stack_a->array[2]
-		&& stack_a->array[0] > stack_a->array[2])
+			&& stack_a->array[1] > stack_a->array[2]
+			&& stack_a->array[0] > stack_a->array[2])
 	{
 		rra(stack_a);
 	}
@@ -50,7 +55,7 @@ void	sort3(t_stack_a *stack_a, t_stack_b *stack_b)
 
 //sorts nubers if given 5
 
-void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
+  void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	totop(stack_a, stack_b);
 	pb(stack_a, stack_b);
@@ -59,12 +64,16 @@ void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
 		totop(stack_a, stack_b);
 		pb(stack_a, stack_b);
 	}
-	sort3(stack_a, stack_b);
+	if (!checksorted(stack_a))
+		sort3(stack_a, stack_b);
 	pa(stack_a, stack_b);
 	if (stack_a->inilen == 5)
 		pa(stack_a, stack_b);
 }
+ 
 
+
+//4 1 5 2 3    4 1 3 2 5
 void	sort100(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	bool	last;

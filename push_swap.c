@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:12:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 14:35:03 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:09:06 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int argc, char **argv)
 	t_stack_a	*stack_a;
 	t_stack_b	*stack_b;
 
+	if (argc == 1)
+		exit(1);
 	stack_a = malloc(sizeof(t_stack_a));
 	stack_b = malloc(sizeof(t_stack_b));
 	init(stack_a, stack_b, argc, argv);

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:08:57 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 13:39:54 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:01:49 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ void	ft_putstr(char *str)
 }
 
 //putstr on stderr
-void	ft_puterror(char *str)
+int	ft_puterror(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 		ft_putcharerr(str[i++]);
+	return (1);
 }
 
 //receives stack and checks if its array contains duplicated digits

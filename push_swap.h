@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 14:53:21 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:13:03 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ void		bubblesort(t_stack_a *stack_a, long *array);
 long		calchunk(t_stack_a *stack_a, long nrmchunk, long chunk);
 void		matchtop(t_stack_a *stack_a);
 bool		checkifdouble(t_stack_a *stack_a);
-void		ft_puterror(char *str);
+int			ft_puterror(char *str);
 void		ft_putcharerr(char c);
 void		*xmalloc(size_t size);
+bool		checksorted(t_stack_a *stack_a);
 
 // push swap moves
 int			sa(t_stack_a *stack_a);

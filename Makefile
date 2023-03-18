@@ -2,8 +2,8 @@
 GREEN = \033[0;92m
 DEFAULT = \033[0;39m
 
-CC = gcc
-SRC = push_swap moves aux test algo
+CC = cc
+SRC =  moves moves1 aux algo auxalgo auxalgo1 auxalgo2 aux1 aux2 aux3 push_swap
 
 NAME = push_swap.a
 
@@ -12,15 +12,13 @@ $(VERBOSE).SILENT:
 all: $(NAME)
 
 $(NAME): $(SRC:=.o)
-	@echo "$(GREEN)\nCompiling...\n$(DEFAULT)"
 	ar rcs $(NAME) $(SRC:=.o)
-	$(CC) -Wall -Werror -Wextra -g $(NAME) -o push_swap
-	@echo "$(GREEN)\nDone compiling...\n$(DEFAULT)"
+	$(CC) -Wall -Werror -Wextra -g  $(NAME) -o push_swap
+	@echo "$(GREEN)\n\t\tDone compiling...\n$(DEFAULT)"
 clean:
 	rm -f $(SRC:=.o)
 fclean:
-	@echo "$(GREEN)\nCleaning up...\n$(DEFAULT)"
 	rm -f $(SRC:=.o) $(NAME) push.exe
-		@echo "$(GREEN)\nDone cleaning...\n$(DEFAULT)"
+		@echo "$(GREEN)\n\t\tDone cleaning...\n$(DEFAULT)"
 re: fclean all
 
