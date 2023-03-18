@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 11:54:27 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 14:53:21 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct stack_a
 	long	curlen;
 	long	smallest;
 	long	biggest;
-
+	long	stdchunk;
 }			t_stack_a;
 
 typedef struct stack_b
@@ -38,24 +38,30 @@ typedef struct stack_b
 	long	smallest;
 	long	biggest;
 	int		multiplier;
-
+	bool	last;
 }			t_stack_b;
 
 //base functions
-long		*mArray(int argc, char **argv);
+long		*makearray(int argc, char **argv);
 void		makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b);
 long		ft_atol(const char *str);
 long		ft_strlen(char *str);
-bool		checkIfArray(long *array);
-bool		checkArgs(t_stack_a *stack_a);
-int			error(t_stack_a *stack_a, t_stack_b *stack_b);
+bool		checkifarray(long *array);
+bool		checkargs(t_stack_a *stack_a);
+void		error(t_stack_a *stack_a, t_stack_b *stack_b);
 bool		ft_isdigit(char c);
 bool		onlydigit(int argc, char **argv);
-void 		zero(t_stack_a *stack_a, t_stack_b *stack_b);
-long 		m_abs(long x);
-int 		init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
+void		zero(t_stack_a *stack_a, t_stack_b *stack_b);
+long		m_abs(long x);
+void		init(t_stack_a *stack_a, t_stack_b *stack_b, int argc, char **argv);
 void		bubblesort(t_stack_a *stack_a, long *array);
 long		calchunk(t_stack_a *stack_a, long nrmchunk, long chunk);
+void		matchtop(t_stack_a *stack_a);
+bool		checkifdouble(t_stack_a *stack_a);
+void		ft_puterror(char *str);
+void		ft_putcharerr(char c);
+void		*xmalloc(size_t size);
+
 // push swap moves
 int			sa(t_stack_a *stack_a);
 int			sb(t_stack_b *stack_b);
@@ -63,10 +69,10 @@ int			ra(t_stack_a *stack_a);
 int			pb(t_stack_a *stack_a, t_stack_b *stack_b);
 int			pa(t_stack_a *stack_a, t_stack_b *stack_b);
 int			rb(t_stack_b *stack_b);
-int			rr(t_stack_a *stack_a, t_stack_b *stack_b);
 int			rra(t_stack_a *stack_a);
 int			rrb(t_stack_b *stack_b);
-int			rrr(t_stack_a *stack_a, t_stack_b *stack_b);
+void		shiftdown(t_stack_a *stack_a, t_stack_b *stack_b);
+void		shiftdownb(t_stack_a *stack_a, t_stack_b *stack_b);
 // algorithm
 void		sort2(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort3(t_stack_a *stack_a, t_stack_b *stack_b);
@@ -77,14 +83,19 @@ void		totop(t_stack_a *stack_a, t_stack_b *stack_b);
 char		findsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chun);
 void		smartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 long		findbiggest(t_stack_a *stack_a, t_stack_b *stack_b, char flag);
-long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag, long chunk);
+long		findsmallest(t_stack_a *stack_a, t_stack_b *stack_b, char flag,
+				long chunk);
+void		dosmartpush(t_stack_a *stack_a, t_stack_b *stack_b,
+				long chunk);
 void		pushtop(t_stack_a *stack_a, long i);
-void		smartTop(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
-void	npushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long oldchunk);
-char 	nfindsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk, long stdchunk);
-void	afindsmallest(t_stack_a *stack_a, t_stack_b *stack_b);
-// tester functions
-void		printArray(t_stack_a *stack_a);
-void		printArrayb(t_stack_b *stack_b);
+void		smarttop(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
+void		npushchunk(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
+				long oldchunk);
+char		nfindsmartpush(t_stack_a *stack_a, t_stack_b *stack_b, long chunk,
+				long stdchunk);
+void		afindsmallest(t_stack_a *stack_a, t_stack_b *stack_b);
+long		findsmallestb(t_stack_b *stack_b, long chunk);
+long		findbiggestb(t_stack_b *stack_b);
+void		dofind(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 
 #endif

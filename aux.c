@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aux.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/18 11:57:36 by garibeir          #+#    #+#             */
+/*   Updated: 2023/03/18 14:36:27 by garibeir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 //checks if char is a digit
@@ -7,22 +19,21 @@ bool	ft_isdigit(char c)
 		return (true);
 	return (false);
 }
+
 //iterates over a 2d array of chars to check if all of them represent digits
-bool onlydigit(int argc, char **argv)
+bool	onlydigit(int argc, char **argv)
 {
 	int	i;
 	int	j;
-
 
 	i = 1;
 	while (i != argc)
 	{
 		j = 0;
-		while (j != ft_strlen(argv[i] - 1))
+		while (j != ft_strlen(argv[i]))
 		{
-			
-			 if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
-				j++; 
+			if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
+				j++;
 			if (ft_isdigit(argv[i][j]) == false)
 				return (false);
 			j++;
@@ -32,41 +43,12 @@ bool onlydigit(int argc, char **argv)
 	return (true);
 }
 
-void	ft_putChar(char c)
-{
-	write(1, &c, 1);
-}
-//put char on stderr
-void	ft_putCharE(char c)
-{
-	write (2, &c, 1);
-}
-
-void	ft_putStr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_putChar(str[i++]);
-}
-//putstr on stderr 
-void	ft_putError(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_putCharE(str[i++]);
-}
-
-
 // takes in a string and turns it into longs
 long	ft_atol(const char *str)
 {
-	long	    i;	
-	long	res;	
-	int	    sign;
+	long	i;
+	long	res;
+	int		sign;
 
 	sign = 1;
 	i = 0;
@@ -85,12 +67,12 @@ long	ft_atol(const char *str)
 }
 
 //Takes a an array of strings and transforms them into one array of longs
-long 	*mArray(int argc, char **argv)
+long	*makearray(int argc, char **argv)
 {
 	long	i;
 	long	j;
-	long 	*array;
-	long 	len;
+	long	*array;
+	long	len;
 
 	i = 1;
 	j = 0;
@@ -100,9 +82,8 @@ long 	*mArray(int argc, char **argv)
 		len++;
 		i++;
 	}
-	//printf("len: %ld\n", len);
 	i = 1;
-	array = malloc(sizeof(long) * len);
+	array = xmalloc(sizeof(long) * len);
 	if (!array)
 		return (NULL);
 	while (i != argc)
@@ -122,104 +103,4 @@ long	ft_strlen(char *str)
 	while (str[j])
 		j++;
 	return (j);
-}
-
-//receives stack and checks if its array contains duplicated digits
-bool	checkIfDouble(t_stack_a *stack_a)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i <= stack_a->inilen)
-	{
-		j = i + 1;
-		while (j <= stack_a->inilen - 1)
-		{
-			if (stack_a->array[i] == stack_a->array[j])
-				return (false);
-			j++;
-		}
-		i++;
-	}
-	return (true);
-}
-//Checks if all array members are in the limits of int and calls check double
-bool checkArgs(t_stack_a *stack_a)
-{
-	int	i;
-
-	i = 0;
-	if (checkIfDouble(stack_a) == false )
-			return (false);
-	while (i != stack_a->inilen)
-	{
-		if (stack_a->array[i] > INT_MAX)
-			return (false);
-		if (stack_a->array[i] < INT_MIN)
-			return(false);
-		i++;
-	}
-	return (true);
-}
-//Prints the word Error and a new line on stderr and frees memory in case of abnormal shut down
-int	error(t_stack_a *stack_a, t_stack_b *stack_b)
-{
-	ft_putError("Error");
-	ft_putCharE('\n');
-	free(stack_b->array);
-    free(stack_a->array);
-	free(stack_a->auxarray);
-	free(stack_a);
-	free(stack_b);
-	return(1);
-}
-
-
-
-void zero(t_stack_a *stack_a, t_stack_b *stack_b)
-{
-	int	i;
-
-	i = 0;
-	if (!stack_b->array)
-		error(stack_a, stack_b);
-	while (i < stack_b->inilen - 1)
-	{
-		stack_b->array[i] = 0;
-		i++;
-	}
-}
-
-long m_abs(long x)
-{
-	if (x == 0)
-		return (0);
-	if (x < 0)
-		x *= -1;
-	return (x);
-}
-void makeauxarray(t_stack_a *stack_a, t_stack_b *stack_b)
-{
-	int	i;
-	
-	i = 0;
-	stack_a->auxarray = malloc(sizeof(long) * stack_a->inilen);
-	 if (!stack_a->auxarray)
-		error(stack_a, stack_b);
-	while (i < stack_a->inilen)
-	{
-		stack_a->auxarray[i] = stack_a->array[i];
-		i++;
-	}
-	bubblesort(stack_a, stack_a->auxarray);
-	
-}
-
-long	calchunk(t_stack_a *stack_a, long nrmchunk, long chunk)
-{
-	if ( stack_a->inilen - chunk < nrmchunk)
-		return (stack_a->inilen - chunk);
-	else
-		return (nrmchunk);
 }
