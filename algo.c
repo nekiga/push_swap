@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:38:27 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/18 16:44:57 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:33:13 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,7 @@ void	sort3(t_stack_a *stack_a, t_stack_b *stack_b)
 
 //sorts nubers if given 5
 
-  void	sort5(t_stack_a *stack_a, t_stack_b *stack_b)
-{
-	totop(stack_a, stack_b);
-	pb(stack_a, stack_b);
-	if (stack_a->inilen == 5)
-	{
-		totop(stack_a, stack_b);
-		pb(stack_a, stack_b);
-	}
-	if (!checksorted(stack_a))
-		sort3(stack_a, stack_b);
-	pa(stack_a, stack_b);
-	if (stack_a->inilen == 5)
-		pa(stack_a, stack_b);
-}
- 
+
 
 
 //4 1 5 2 3    4 1 3 2 5

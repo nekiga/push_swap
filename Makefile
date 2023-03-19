@@ -3,7 +3,7 @@ GREEN = \033[0;92m
 DEFAULT = \033[0;39m
 
 CC = cc
-SRC =  moves moves1 aux algo auxalgo auxalgo1 auxalgo2 aux1 aux2 aux3 push_swap
+SRC =  moves moves1 aux algo auxalgo auxalgo1 auxalgo2 aux1 aux2 aux3 algo5 push_swap
 
 NAME = push_swap.a
 
