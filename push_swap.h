@@ -6,7 +6,7 @@
 /*   By: garibeir <garibeir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:11:59 by garibeir          #+#    #+#             */
-/*   Updated: 2023/03/19 10:37:31 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:14:39 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void		shiftdownb(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort2(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort3(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort5(t_stack_a *stack_a, t_stack_b *stack_b);
-char	findsmartpush5(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
-void	smarttop5(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
-void	smartpush5(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
+char		findsmartpush5(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
+void		smarttop5(t_stack_a *stack_a, t_stack_b *stack_b, long tar);
+void		smartpush5(t_stack_a *stack_a, t_stack_b *stack_b, long chunk);
 
 void		sort100(t_stack_a *stack_a, t_stack_b *stack_b);
 void		sort500(t_stack_a *stack_a, t_stack_b *stack_b);

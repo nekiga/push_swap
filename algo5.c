@@ -75,3 +75,10 @@ void	smartpush5(t_stack_a *stack_a, t_stack_b *stack_b, long chunk)
 		pb(stack_a, stack_b);
 	}
 }
+
+
+last = findlast();
+penultimo = findpenultimo();
+
+last.next = *stack,
+penultimo. next = null

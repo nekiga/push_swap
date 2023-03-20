@@ -18,7 +18,7 @@ $(NAME): $(SRC:=.o)
 clean:
 	rm -f $(SRC:=.o)
 fclean:
-	rm -f $(SRC:=.o) $(NAME) push.exe
+	rm -f $(SRC:=.o) $(NAME) push_swap
 		@echo "$(GREEN)\n\t\tDone cleaning...\n$(DEFAULT)"
 re: fclean all
 
